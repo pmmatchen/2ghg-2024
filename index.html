@@ -79,10 +79,30 @@
       <div class="card">
         <div class="content">
           <div class="front md">When is it appropriate to salute?</div>
-          <div class="back">
-            <ul>
-              <li></li>
-            </ul>
+          <div class="back sm left">
+            <li>Upon encountering an officer</li>
+            <li>National Anthem, To the Color, Hail to the Chief, anthem of foreign allies.</li>
+            <li>Uncased National Colors Outdoors</li>
+            <li>Ceremonial occasions as prescribed</li>
+            <li>During raising and lowering of the flag</li>
+            <li>During the sounding of honors</li>
+            <li>During the pledge of allegiance outdoors</li>
+            <li>When turning over control of formations</li>
+            <li>When rendering reports</li>
+            <li>To officers of friendly foreign contries</li>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">When is it appropriate NOT to salute?</div>
+          <div class="back sm left">
+            <li>Indoors, except when reporting to an officer</li>
+            <li>Encountering a prisoner</li>
+            <li>When saluting is obviously inappropriate as when both hands are full</li>
+            <li>If either party is in civilian clothes</li>
+            <li>In public transportation or while driving</li>
           </div>
         </div>
       </div>
@@ -98,6 +118,69 @@
             <li>Honor</li>
             <li>Integrity</li>
             <li>Personal Courage</li>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define LOYALTY</div>
+          <div class="back md">
+            Devote yourself to the U.S. Constitution, the Army, your unit, and other fellow Soldiers.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define DUTY</div>
+          <div class="back md">
+            Fulfill your responsibilities and accomplish tasks as part of a team, without taking shortcuts.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define RESPECT</div>
+          <div class="back md">
+            Treat others with dignity and respect while expecting others to do the same. That’s the Soldier’s Code.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define SELFLESS SERVICE</div>
+          <div class="back md">
+            Commit to going a little further, enduring a little longer, and adding to the effort in your own way.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define HONOR</div>
+          <div class="back md">
+            Develop honorable habits and live up to our values in every choice you make.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define INTEGRITY</div>
+          <div class="back md">
+            Stand up for what’s right, legally and morally, without doing or saying anything that deceives others.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="content">
+          <div class="front md">Define PERSONAL COURAGE</div>
+          <div class="back md">
+            Face moral fear or adversity, while standing up for and acting upon the things you know are honorable.
           </div>
         </div>
       </div>
@@ -560,6 +643,8 @@
       align-items: center;
       text-align: center;
       flex-direction: column;
+      box-sizing: border-box;
+      padding: 0 0 0 1rem;
     }
 
     .front li,
@@ -570,6 +655,9 @@
     .front.left,
     .back.left {
       align-items: flex-start;
+      text-align: left;
+      padding-left: 1em;
+      text-indent: -1.4em;
     }
 
     .front.sm,
@@ -596,14 +684,17 @@
   <script>
     window.onload = (event) => {
       const cardBanks = document.querySelectorAll(".card-bank");
+      const params = new URLSearchParams(location.search);
 
       const cardBankTitles = [...cardBanks].map((d) =>
         d.getAttribute("data-card-bank-title")
       );
       cardBankSelector.innerHTML = "";
+
       cardBankTitles.forEach((d) => {
         const option = document.createElement("option");
         option.innerText = d;
+        option.selected = params.get('bank') === d;
         cardBankSelector.options.add(option);
       });
 
@@ -677,6 +768,11 @@
             d.classList.remove("current");
           }
         });
+        const params = new URLSearchParams(location.search);
+        params.set('bank', bank)
+        const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?${params.toString()}`;
+
+        window.history.pushState({ path: newurl }, '', newurl);
       };
 
       cardBankSelector.addEventListener("change", handleCardBankChange);
