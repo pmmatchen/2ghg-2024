@@ -589,6 +589,8 @@
       background: #eee;
       width: 100vw;
       height: 100vh;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .nav-bar {
@@ -602,6 +604,11 @@
       text-align: center;
       z-index: 1;
     }
+
+    .nav-bar > * {
+      vertical-align: middle;
+    }
+
 
     .footer {
       background-color: #333;
@@ -636,7 +643,7 @@
 
     .card {
       position: absolute;
-      top: 50%;
+      top: calc(50% + 2.5rem);
       left: 50%;
       width: 400px;
       height: 300px;
@@ -728,6 +735,22 @@
       transform: rotateY(180deg);
     }
 
+    /* #previousButton,
+    #nextButton {
+      position: fixed;
+      top: calc(50% - 1.5rem);
+      width: 3rem;
+      height: 3rem;
+    }
+
+    #previousButton {
+      right: calc(50% + 220px);      
+    }
+
+    #nextButton {
+      left: calc(50% + 220px + 1rem);      
+    } */
+
     @media screen and (max-width: 600px) {
       button,
       select {
@@ -755,6 +778,10 @@
       );
       cardBankSelector.innerHTML = "";
 
+      const allOption = document.createElement("option");
+      allOption.innerText = 'All';
+      cardBankSelector.options.add(allOption);
+
       cardBankTitles.forEach((d) => {
         const option = document.createElement("option");
         option.innerText = d;
@@ -769,7 +796,13 @@
           .map((a) => a[1]);
 
       const currentCards = () => {
-        const bank = document.querySelector(`.card-bank[data-card-bank-title=${cardBankSelector[cardBankSelector.selectedIndex].text}]`);
+        let bank;
+        let bankName = cardBankSelector[cardBankSelector.selectedIndex].text
+        if (bankName === 'All') {
+          bank = document.querySelector(`.card-bank`).parentElement;
+        } else {
+          bank = document.querySelector(`.card-bank[data-card-bank-title=${bankName}]`);
+        }
         const cards = bank.querySelectorAll(".card");
         return [...cards];
       }
@@ -779,11 +812,8 @@
       }
 
       const whichCard = () => {
-        const bank = document.querySelector(`.card-bank[data-card-bank-title=${cardBankSelector[cardBankSelector.selectedIndex].text}]`);
-        const cards = bank.querySelectorAll(".card");
-        console.log('whichCard', cards);
         let found = 0;
-        [...cards].forEach((d, i) => {
+        currentCards().forEach((d, i) => {
           if (d.classList.contains('current')) {
             found = i;
           }
@@ -791,13 +821,22 @@
         return found;
       }
 
+      const setBankCurrent = (bank) => {
+        [...document.querySelectorAll('.card-bank')].forEach(d => {
+          if (d === bank) {
+            d.classList.add('current')
+          } else {
+            d.classList.remove('current')
+          }
+        })
+      }
+
       const showCard = (n) => {
-        const bank = document.querySelector(`.card-bank[data-card-bank-title=${cardBankSelector[cardBankSelector.selectedIndex].text}]`);
-        console.log('showCard', n, bank);
-        const cards = [...bank.querySelectorAll(".card")];
+        const cards = currentCards()
         cards.forEach((d, i) => {
           if (i === n % cards.length) {
             d.classList.add('current');
+            setBankCurrent(d.parentElement);
           } else {
             d.classList.remove('current');
           }
@@ -860,11 +899,11 @@
       };
 
       const handleCardBankChange = () => {
-        const bank = cardBankSelector[cardBankSelector.selectedIndex].text;
-        console.log(bank);
+        const bankName = cardBankSelector[cardBankSelector.selectedIndex].text;
+        console.log('PMM>', bankName, cardBanks);
         [...cardBanks].forEach((d) => {
           console.log(d);
-          if (d.getAttribute("data-card-bank-title") === bank) {
+          if (bankName === 'All' || d.getAttribute("data-card-bank-title") === bankName) {
             d.classList.add("current");
             showCard(0);
           } else {
@@ -872,7 +911,7 @@
           }
         });
         const params = new URLSearchParams(location.search);
-        params.set('bank', bank)
+        params.set('bank', bankName)
         const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?${params.toString()}`;
 
         window.history.pushState({ path: newurl }, '', newurl);
