@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>2GHG Study Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -537,7 +537,11 @@
 
     <div class="footer">
       <button id="previousButton">&lt;</button>
+      &nbsp;
+      &nbsp;
       <button id="randomButton">Random</button>
+      &nbsp;
+      &nbsp;
       <button id="nextButton">&gt;</button>
     </div>
   </body>
@@ -680,6 +684,23 @@
       color: white;
       transform: rotateY(180deg);
     }
+
+    @media screen and (max-width: 600px) {
+      button,
+      select {
+        font-size: 2rem;
+      }
+
+      .nav-bar {
+        font-size: 2rem;
+        height: 3rem;
+      }
+
+      .footer {
+        height: 3rem;
+      }
+    }
+
   </style>
   <script>
     window.onload = (event) => {
