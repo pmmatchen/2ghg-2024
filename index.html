@@ -46,6 +46,8 @@
       <select id="cardBankSelector">
         <option>DNC</option>
       </select>
+      <button id="testButton">Test</button>
+      <button id="testWithAnswersButton">Test with Answers</button>
     </div>
 
     <div class="card-bank dnc" data-card-bank-title="DNC">
@@ -80,16 +82,18 @@
         <div class="content">
           <div class="front md">When is it appropriate to salute?</div>
           <div class="back sm left">
-            <li>Upon encountering an officer</li>
-            <li>National Anthem, To the Color, Hail to the Chief, anthem of foreign allies.</li>
-            <li>Uncased National Colors Outdoors</li>
-            <li>Ceremonial occasions as prescribed</li>
-            <li>During raising and lowering of the flag</li>
-            <li>During the sounding of honors</li>
-            <li>During the pledge of allegiance outdoors</li>
-            <li>When turning over control of formations</li>
-            <li>When rendering reports</li>
-            <li>To officers of friendly foreign contries</li>
+            <ul>
+              <li>Upon encountering an officer</li>
+              <li>National Anthem, To the Color, Hail to the Chief, anthem of foreign allies.</li>
+              <li>Uncased National Colors Outdoors</li>
+              <li>Ceremonial occasions as prescribed</li>
+              <li>During raising and lowering of the flag</li>
+              <li>During the sounding of honors</li>
+              <li>During the pledge of allegiance outdoors</li>
+              <li>When turning over control of formations</li>
+              <li>When rendering reports</li>
+              <li>To officers of friendly foreign contries</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -98,11 +102,13 @@
         <div class="content">
           <div class="front md">When is it appropriate NOT to salute?</div>
           <div class="back sm left">
-            <li>Indoors, except when reporting to an officer</li>
-            <li>Encountering a prisoner</li>
-            <li>When saluting is obviously inappropriate as when both hands are full</li>
-            <li>If either party is in civilian clothes</li>
-            <li>In public transportation or while driving</li>
+            <ul>
+              <li>Indoors, except when reporting to an officer</li>
+              <li>Encountering a prisoner</li>
+              <li>When saluting is obviously inappropriate as when both hands are full</li>
+              <li>If either party is in civilian clothes</li>
+              <li>In public transportation or while driving</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -111,13 +117,15 @@
         <div class="content">
           <div class="front md">Recite the Army Values</div>
           <div class="back md left">
-            <li>Loyalty</li>
-            <li>Duty</li>
-            <li>Respect</li>
-            <li>Selfless Service</li>
-            <li>Honor</li>
-            <li>Integrity</li>
-            <li>Personal Courage</li>
+            <ul>
+              <li>Loyalty</li>
+              <li>Duty</li>
+              <li>Respect</li>
+              <li>Selfless Service</li>
+              <li>Honor</li>
+              <li>Integrity</li>
+              <li>Personal Courage</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -777,6 +785,39 @@
         showCard(n + 1);
       };
 
+      const handleTestClicked = () => {
+        const questions = [...document.querySelectorAll('.card .content')];
+        const html = [];
+        html.push('<style>img { max-width: 4rem; }</style>')
+        html.push('<ol>')
+        questions.map((d, i) => {
+          let q = d.querySelector('.front');
+          html.push(`<li>${q.innerHTML.replace(/<br>/g, ' ')}</li>`);
+          html.push(`<p><hr/></p>`);
+        })
+        html.push('</ol>')
+        // document.body.innerHTML = html.join('\n')
+        var testWindow = window.open("", "2GHG Test", "width=800,height=1024");
+        testWindow.document.write(html.join('\n'));        
+      };
+
+      const handleTestWithAnswersClicked = () => {
+        const questions = [...document.querySelectorAll('.card .content')];
+        const html = [];
+        html.push('<style>img { max-width: 4rem; }</style>')
+        html.push('<ol>')
+        questions.map((d, i) => {
+          let q = d.querySelector('.front');
+          let a = d.querySelector('.back');
+          html.push(`<li>${q.innerHTML.replace(/<br>/g, ' ')}</li>`);
+          html.push(`<p>${a.innerHTML}</p>`);
+        })
+        html.push('</ol>')
+        // document.body.innerHTML = html.join('\n')
+        var testWindow = window.open("", "2GHG Test", "width=800,height=1024");
+        testWindow.document.write(html.join('\n'));        
+      };
+
       const handleCardBankChange = () => {
         const bank = cardBankSelector[cardBankSelector.selectedIndex].text;
         console.log(bank);
@@ -800,6 +841,8 @@
       previousButton.addEventListener("click", handlePreviousClicked);
       randomButton.addEventListener("click", handleRandomClicked);
       nextButton.addEventListener("click", handleNextClicked);
+      testButton.addEventListener("click", handleTestClicked);
+      testWithAnswersButton.addEventListener("click", handleTestWithAnswersClicked);
 
       handleCardBankChange();
     };
