@@ -50,29 +50,22 @@
       <button id="testWithAnswersButton">Key</button>
     </div>
 
-    <div class="card-bank dnc" data-card-bank-title="DNC">
+    <div class="card-bank history" data-card-bank-title="History">
       <div class="card">
         <div class="content">
-          <div class="front md">Command to recover from<br />"Present, ARMS"?</div>
-          <div class="back">"Order, ARMS"</div>
+          <div class="front">
+            When was the Horse Guard Founded?
+          </div>
+          <div class="back">October 13, 1808</div>
         </div>
       </div>
+
       <div class="card">
         <div class="content">
-          <div class="front md">In "Stand at Attendion", what can move?</div>
-          <div class="back">Head and eyes</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <div class="front md">What command ends "Dress Right, DRESS"?</div>
-          <div class="back">Ready, FRONT</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="content">
-          <div class="front md">What is the default stance, when in doubt?</div>
-          <div class="back">Attention</div>
+          <div class="front">
+            Who was the first commander of the Horse Guard?
+          </div>
+          <div class="back">Elihu Munsun</div>
         </div>
       </div>
     </div>
@@ -193,6 +186,62 @@
         </div>
       </div>
 
+      <div class="card">
+        <div class="content">
+          <div class="front md">What is Military Bearing?</div>
+          <div class="back md">
+            Military bearing is the demonstration of confidence, discipline, and attitude in everyday life while on or off duty. Soldiers should never lose their military bearing just because they are off duty.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card-bank dnc" data-card-bank-title="DNC">
+      <div class="card">
+        <div class="content">
+          <div class="front md">Command to recover from<br />"Present, ARMS"?</div>
+          <div class="back">"Order, ARMS"</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <div class="front md">In "Stand at Attendion", what can move?</div>
+          <div class="back">Head and eyes</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <div class="front md">What command ends "Dress Right, DRESS"?</div>
+          <div class="back">Ready, FRONT</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="content">
+          <div class="front md">What is the default stance, when in doubt?</div>
+          <div class="back">Attention</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-bank grooming" data-card-bank-title="Grooming">
+      <div class="card">
+        <div class="content">
+          <div class="front">
+            Why do we groom the horses?
+          </div>
+          <div class="back sm left">
+            <ul>
+              <li>Promotes overall health</li>
+              <li>Helps in maintaining condition</li>
+              <li>Helps to prevent diseases of the skin</li>
+              <li>Ensures cleanliness and improves appearance</li>
+              <li>Helps acquaint the rider with unfamiliar horses</li>
+              <li>Allows the rider to check for injuries</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="card-bank ranks" data-card-bank-title="Ranks">
@@ -523,26 +572,6 @@
       </div>
     </div>
 
-    <div class="card-bank history" data-card-bank-title="History">
-      <div class="card">
-        <div class="content">
-          <div class="front">
-            When was the Horse Guard Founded?
-          </div>
-          <div class="back">October 13, 1808</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="content">
-          <div class="front">
-            Who was the first commander of the Horse Guard?
-          </div>
-          <div class="back">Elihu Munsun</div>
-        </div>
-      </div>
-    </div>
-
     <div class="footer">
       <button id="previousButton">&lt;</button>
       &nbsp;
@@ -776,8 +805,9 @@
       }
 
       const handlePreviousClicked = () => {
+        const cards = currentCards()
         const n = whichCard();
-        showCard(n > 0 ? n - 1 : 0);
+        showCard(n > 0 ? n - 1 : cards.length - 1);
       };
 
       const handleRandomClicked = () => {
@@ -794,6 +824,7 @@
       const handleTestClicked = () => {
         const questions = [...document.querySelectorAll('.card .content')];
         const html = [];
+        html.push('<head><title>2GHG Test</title></head>')
         html.push('<style>img { max-width: 4rem; }</style>')
         html.push('<ol>')
         questions.map((d, i) => {
@@ -805,11 +836,13 @@
         // document.body.innerHTML = html.join('\n')
         var testWindow = window.open("", "2GHG Test", "width=800,height=1024");
         testWindow.document.write(html.join('\n'));        
+        testWindow.document.close();
       };
 
       const handleTestWithAnswersClicked = () => {
         const questions = [...document.querySelectorAll('.card .content')];
         const html = [];
+        html.push('<head><title>2GHG Test with Answers</title></head>')
         html.push('<style>img { max-width: 4rem; }</style>')
         html.push('<ol>')
         questions.map((d, i) => {
@@ -817,11 +850,13 @@
           let a = d.querySelector('.back');
           html.push(`<li>${q.innerHTML.replace(/<br>/g, ' ')}</li>`);
           html.push(`<p>${a.innerHTML}</p>`);
+          html.push(`<p><hr/></p>`);
         })
         html.push('</ol>')
         // document.body.innerHTML = html.join('\n')
         var testWindow = window.open("", "2GHG Test with Answers", "width=800,height=1024");
         testWindow.document.write(html.join('\n'));        
+        testWindow.document.close();
       };
 
       const handleCardBankChange = () => {
