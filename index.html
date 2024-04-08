@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>2GHG Study Guide</title>
+    <link rel="icon" href="2GHGLogo.png">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#eee">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#eee">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#eee">    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,9 +49,9 @@
   </head>
   <body>
     <div class="nav-bar">
-      Study Topic:
+      Topic:
       <select id="cardBankSelector">
-        <option>DNC</option>
+        <option></option>
       </select>
       <button id="testButton">Test</button>
       <button id="testWithAnswersButton">Key</button>
@@ -755,16 +762,18 @@
     @media screen and (max-width: 600px) {
       button,
       select {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
 
       .nav-bar {
-        font-size: 2rem;
+        font-size: 1.5rem;
         height: 3rem;
+        line-height: 3rem;
       }
 
       .footer {
         height: 3rem;
+        line-height: 3rem;
       }
     }
 
