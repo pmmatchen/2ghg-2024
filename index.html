@@ -50,6 +50,7 @@
      -->
   </head>
   <body>
+    <div id="flashcards">
     <div class="nav-bar">
       Topic:
       <select id="cardBankSelector">
@@ -590,6 +591,10 @@
       &nbsp;
       <button id="nextButton">&gt;</button>
     </div>
+    </div>
+
+    <div id="test"></div>
+
   </body>
   <style>
     html,
@@ -745,6 +750,24 @@
       transform: rotateY(180deg);
     }
 
+    #test {
+      display: none;
+    }
+
+    #test.active {
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      background-color: rgba(255, 255, 255, 0.99);
+      z-index: 10;
+      overflow: auto;
+    }
+
+    #test.active > * { overflow: auto !important; }
+
     /* #previousButton,
     #nextButton {
       position: fixed;
@@ -779,6 +802,20 @@
       }
     }
 
+    @media print {
+      #flashcards {
+        display: none;
+      }
+      #test.active {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow: visible;
+      }
+    }
   </style>
   <script>
     window.onload = (event) => {
@@ -885,9 +922,11 @@
         })
         html.push('</ol>')
         // document.body.innerHTML = html.join('\n')
-        var testWindow = window.open("", "2GHG Test", "width=800,height=1024");
-        testWindow.document.write(html.join('\n'));        
-        testWindow.document.close();
+        // var testWindow = window.open("", "2GHG Test", "width=800,height=1024");
+        // testWindow.document.write(html.join('\n'));        
+        // testWindow.document.close();
+        test.innerHTML = html.join('')
+        test.classList.add('active')
       };
 
       const handleTestWithAnswersClicked = () => {
@@ -905,9 +944,11 @@
         })
         html.push('</ol>')
         // document.body.innerHTML = html.join('\n')
-        var testWindow = window.open("", "2GHG Test with Answers", "width=800,height=1024");
-        testWindow.document.write(html.join('\n'));        
-        testWindow.document.close();
+        // var testWindow = window.open("", "2GHG Test with Answers", "width=800,height=1024");
+        // testWindow.document.write(html.join('\n'));        
+        // testWindow.document.close();
+        test.innerHTML = html.join('')
+        test.classList.add('active')
       };
 
       const handleCardBankChange = () => {
@@ -935,6 +976,7 @@
       nextButton.addEventListener("click", handleNextClicked);
       testButton.addEventListener("click", handleTestClicked);
       testWithAnswersButton.addEventListener("click", handleTestWithAnswersClicked);
+      test.addEventListener("click", () => { test.classList.remove('active'); });
 
       handleCardBankChange();
     };
