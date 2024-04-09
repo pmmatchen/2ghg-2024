@@ -1,0 +1,12 @@
+{
+    "name": "2GHG Study App",
+    "icons": [
+        {
+            "src": "2GHGLogo.png",
+            "type": "image/png",
+            "sizes": "428x464"
+        }
+    ],
+    "start_url": "./index.html",
+    "display": "standalone"
+}
