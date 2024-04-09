@@ -8,11 +8,11 @@
     <link rel="icon" href="2GHGLogo.png">
     <link rel="apple-touch-icon" href="2GHGLogo.png">
     <!-- Chrome, Firefox OS and Opera -->
-    <meta name="theme-color" content="#eee">
+    <meta name="theme-color" content="#333">
     <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#eee">
+    <meta name="msapplication-navbutton-color" content="#333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#eee">    
+    <meta name="apple-mobile-web-app-status-bar-style" content="#333">    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,7 +60,7 @@
       <button id="testWithAnswersButton">Key</button>
     </div>
 
-    <div class="card-bank history" data-card-bank-title="History">
+    <div class="card-bank history" data-card-bank-title="History" tabindex="1">
       <div class="card" tabindex="1">
         <div class="content">
           <div class="front">
@@ -80,7 +80,7 @@
       </div>
     </div>
 
-    <div class="card-bank customs" data-card-bank-title="Customs">
+    <div class="card-bank customs" data-card-bank-title="Customs" tabindex="1">
       <div class="card" tabindex="1">
         <div class="content">
           <div class="front md">When is it appropriate to salute?</div>
@@ -207,7 +207,7 @@
 
     </div>
 
-    <div class="card-bank dnc" data-card-bank-title="DNC">
+    <div class="card-bank dnc" data-card-bank-title="DNC" tabindex="1">
       <div class="card" tabindex="1">
         <div class="content">
           <div class="front md">Command to recover from<br />"Present, ARMS"?</div>
@@ -234,7 +234,7 @@
       </div>
     </div>
 
-    <div class="card-bank grooming" data-card-bank-title="Grooming">
+    <div class="card-bank grooming" data-card-bank-title="Grooming" tabindex="1">
       <div class="card" tabindex="1">
         <div class="content">
           <div class="front">
@@ -254,7 +254,7 @@
       </div>
     </div>
 
-    <div class="card-bank ranks" data-card-bank-title="Ranks">
+    <div class="card-bank ranks" data-card-bank-title="Ranks" tabindex="1">
 
       <!-- Enlisted -->
 
@@ -657,8 +657,8 @@
 
     .card {
       position: absolute;
-      top: calc(50% + 2.5rem);
-      left: 50%;
+      top: calc(50% + 0rem);
+      left: calc(50% - .5rem);
       width: 400px;
       height: 300px;
       margin: -200px;
@@ -788,17 +788,21 @@
       button,
       select {
         font-size: 1.5rem;
+        border: none;
+        border-radius: 4px;
+        height: 3rem;
+        color: #333;
       }
 
       .nav-bar {
         font-size: 1.5rem;
-        height: 3rem;
-        line-height: 3rem;
+        height: 5rem;
+        line-height: 5rem;
       }
 
       .footer {
-        height: 3rem;
-        line-height: 3rem;
+        height: 5rem;
+        line-height: 5rem;
       }
     }
 
@@ -913,7 +917,7 @@
         const questions = [...document.querySelectorAll('.card .content')];
         const html = [];
         html.push('<head><title>2GHG Test</title></head>')
-        html.push('<style>img { max-width: 4rem; }</style>')
+        html.push('<style>#test img { max-width: 4rem; }</style>')
         html.push('<ol>')
         questions.map((d, i) => {
           let q = d.querySelector('.front');
@@ -933,7 +937,7 @@
         const questions = [...document.querySelectorAll('.card .content')];
         const html = [];
         html.push('<head><title>2GHG Test with Answers</title></head>')
-        html.push('<style>img { max-width: 4rem; }</style>')
+        html.push('<style>#test img { max-width: 4rem; }</style>')
         html.push('<ol>')
         questions.map((d, i) => {
           let q = d.querySelector('.front');
