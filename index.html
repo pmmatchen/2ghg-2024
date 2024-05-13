@@ -1175,7 +1175,7 @@
 
     window.onload = (event) => {
       const params = new URLSearchParams(location.search);
-      testNo = params.get('test') || 'test-1'
+      testNo = params.get('test') || 'test-2'
       document.title = `2GHG Study Guide - ${testNo.replace(/test-/, 'Test #')}`
       const cardBanks = document.querySelectorAll(`.card-bank.${testNo}`);
 
