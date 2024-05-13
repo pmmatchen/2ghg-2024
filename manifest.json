@@ -5,8 +5,39 @@
             "src": "2GHGLogo.png",
             "type": "image/png",
             "sizes": "428x464"
+        },
+        {
+            "src": "assets/1928 McClellan saddle 3 views blank.jpg"
+        },
+        {
+            "src": "assets/1928 McClellan saddle 3 views.jpg"
+        },
+        {
+            "src": "assets/1928 McClellan saddle blank.jpg"
+        },
+        {
+            "src": "assets/1928 McClellan saddle.jpg"
+        },
+        {
+            "src": "assets/Bridle blank.jpg"
+        },
+        {
+            "src": "assets/Bridle.jpg"
+        },
+        {
+            "src": "assets/Halter blank.jpg"
+        },
+        {
+            "src": "assets/Halter.jpg"
+        },
+        {
+            "src": "assets/Stirrup blank.jpg"
+        },
+        {
+            "src": "assets/Stirrup.jpg"
         }
     ],
     "start_url": "./index.html",
-    "display": "standalone"
+    "display": "standalone",
+
 }
